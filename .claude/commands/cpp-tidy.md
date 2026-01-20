@@ -1,4 +1,4 @@
-Run the cpp-guidelines-auditor agent to audit C++ code against the C++ Core Guidelines.
+Run the cpp-cg-tidy agent to audit C++ code against the C++ Core Guidelines.
 
 Target: $ARGUMENTS
 
