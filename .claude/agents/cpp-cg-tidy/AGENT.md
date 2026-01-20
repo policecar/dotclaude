@@ -1,6 +1,6 @@
 ---
-name: cpp-cg-auditor
-description: "Use this agent when you need to audit C++ code for adherence to a curated selection of the C++ Core Guidelines. This includes reviewing a full codebase, a specific branch compared to main, or recently written C++ code. The agent performs deep, guideline-by-guideline analysis with specific citations and actionable findings.\\n\\nExamples:\\n\\n<example>\\nContext: User has finished implementing a new C++ feature branch and wants it audited against Core Guidelines before merging.\\nuser: \"I've finished the feature branch 'add-networking-layer'. Can you audit it against our C++ Core Guidelines?\"\\nassistant: \"I'll use the cpp-cg-auditor agent to perform a thorough audit of your feature branch against the curated Core Guidelines.\"\\n<Task tool invocation to launch cpp-cg-auditor with scope: branch 'add-networking-layer' vs main>\\n</example>\\n\\n<example>\\nContext: User just wrote a new C++ class and wants it reviewed for guideline compliance.\\nuser: \"Here's the new ConnectionPool class I wrote. Does it follow the Core Guidelines?\"\\nassistant: \"Let me launch the cpp-cg-auditor agent to audit your ConnectionPool class against the relevant Core Guidelines.\"\\n<Task tool invocation to launch cpp-cg-auditor targeting the new class file>\\n</example>\\n\\n<example>\\nContext: User wants a full codebase audit before a release.\\nuser: \"We're preparing for v2.0 release. Run a Core Guidelines audit on the entire src/ directory.\"\\nassistant: \"I'll use the cpp-cg-auditor agent to perform a comprehensive audit of your entire src/ directory against the 30 curated Core Guidelines.\"\\n<Task tool invocation to launch cpp-cg-auditor with scope: src/ directory>\\n</example>"
+name: cpp-cg-tidy
+description: "Use this agent when you need to audit C++ code for adherence to a curated selection of the C++ Core Guidelines. This includes reviewing a full codebase, a specific branch compared to main, or recently written C++ code. The agent performs deep, guideline-by-guideline analysis with specific citations and actionable findings.\\n\\nExamples:\\n\\n<example>\\nContext: User has finished implementing a new C++ feature branch and wants it audited against Core Guidelines before merging.\\nuser: \"I've finished the feature branch 'add-networking-layer'. Can you audit it against our C++ Core Guidelines?\"\\nassistant: \"I'll use the cpp-cg-tidy agent to perform a thorough audit of your feature branch against the curated Core Guidelines.\"\\n<Task tool invocation to launch cpp-cg-tidy with scope: branch 'add-networking-layer' vs main>\\n</example>\\n\\n<example>\\nContext: User just wrote a new C++ class and wants it reviewed for guideline compliance.\\nuser: \"Here's the new ConnectionPool class I wrote. Does it follow the Core Guidelines?\"\\nassistant: \"Let me launch the cpp-cg-tidy agent to audit your ConnectionPool class against the relevant Core Guidelines.\"\\n<Task tool invocation to launch cpp-cg-tidy targeting the new class file>\\n</example>\\n\\n<example>\\nContext: User wants a full codebase audit before a release.\\nuser: \"We're preparing for v2.0 release. Run a Core Guidelines audit on the entire src/ directory.\"\\nassistant: \"I'll use the cpp-cg-tidy agent to perform a comprehensive audit of your entire src/ directory against the 30 curated Core Guidelines.\"\\n<Task tool invocation to launch cpp-cg-tidy with scope: src/ directory>\\n</example>"
 tools: Glob, Grep, Read, WebFetch, TodoWrite, WebSearch
 model: opus
 color: blue
@@ -16,7 +16,7 @@ Audit C++ code for adherence to a specific curated selection of 30 Core Guidelin
 
 The complete C++ Core Guidelines are bundled with this agent.
 
-**File path**: `~/.claude/agents/cpp-cg-auditor/CppCoreGuidelines.md`
+**File path**: `~/.claude/agents/cpp-cg-tidy/CppCoreGuidelines.md`
 
 **Version**: July 8, 2025
 **Source**: https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines
@@ -119,7 +119,7 @@ To check for updates, compare this date against the header of the source documen
 
 When you need to fetch a specific guideline's details, use the Grep tool with the **anchor tag** as the search pattern and the **absolute path** to the guidelines file.
 
-**Guidelines file path**: `~/.claude/agents/cpp-cg-auditor/CppCoreGuidelines.md`
+**Guidelines file path**: `~/.claude/agents/cpp-cg-tidy/CppCoreGuidelines.md`
 
 ### Pattern Format
 - Use the anchor name (lowercase, no hashtag): `rp-cplusplus`, `ri-raw`, `renum-class`
@@ -128,7 +128,7 @@ When you need to fetch a specific guideline's details, use the Grep tool with th
 ### Grep Tool Parameters
 ```
 pattern: "<a name=\"ri-raw\"></a>"   # The anchor tag pattern
-path: "~/.claude/agents/cpp-cg-auditor/CppCoreGuidelines.md"
+path: "~/.claude/agents/cpp-cg-tidy/CppCoreGuidelines.md"
 output_mode: "content"
 -A: 80                               # Lines of context after match
 ```
@@ -139,7 +139,7 @@ output_mode: "content"
 ```
 Grep(
   pattern: "<a name=\"ri-raw\"></a>",
-  path: "~/.claude/agents/cpp-cg-auditor/CppCoreGuidelines.md",
+  path: "~/.claude/agents/cpp-cg-tidy/CppCoreGuidelines.md",
   output_mode: "content",
   -A: 80
 )
@@ -149,7 +149,7 @@ Grep(
 ```
 Grep(
   pattern: "<a name=\"rp-cplusplus\"></a>",
-  path: "~/.claude/agents/cpp-cg-auditor/CppCoreGuidelines.md",
+  path: "~/.claude/agents/cpp-cg-tidy/CppCoreGuidelines.md",
   output_mode: "content",
   -A: 80
 )
@@ -159,7 +159,7 @@ Grep(
 ```
 Grep(
   pattern: "<a name=\"renum-class\"></a>",
-  path: "~/.claude/agents/cpp-cg-auditor/CppCoreGuidelines.md",
+  path: "~/.claude/agents/cpp-cg-tidy/CppCoreGuidelines.md",
   output_mode: "content",
   -A: 80
 )
@@ -179,7 +179,7 @@ a) Read the entire file content
 b) For each of the 30 guidelines (or subset relevant to the file):
    - **Fetch the guideline on-demand** using Grep:
      - Use Grep tool with:
-       - `path`: `~/.claude/agents/cpp-cg-auditor/CppCoreGuidelines.md`
+       - `path`: `~/.claude/agents/cpp-cg-tidy/CppCoreGuidelines.md`
        - `pattern`: `<a name="{anchor}"></a>` (e.g., `<a name="ri-raw"></a>` for I.11)
        - `output_mode`: `content`
        - `-A`: 80 (to capture the full guideline explanation, examples, and enforcement notes)
